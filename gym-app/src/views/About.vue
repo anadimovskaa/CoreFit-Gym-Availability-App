@@ -1,9 +1,47 @@
 <script setup>
+import { ref, computed } from "vue";
+
 import trainer1 from "../assets/coach11.png";
 import trainer2 from "../assets/coach22.png";
 import trainer3 from "../assets/coach33.png";
+import trainer4 from "../assets/coach44.jpg";
+import trainer5 from "../assets/coach55.jpg";
+import trainer6 from "../assets/coach66.jpg";
 import gym from "../assets/gym.png";
+
+const trainers = ref([
+  { name: "Coach Alex", img: trainer1, desc: "Strength training expert with 10+ years of experience." },
+  { name: "Coach Maria", img: trainer2, desc: "Certified yoga and pilates instructor." },
+  { name: "Coach Nina", img: trainer3, desc: "Cardio and HIIT specialist." },
+  { name: "Coach Tom", img: trainer4, desc: "Functional training and mobility coach." },
+  { name: "Coach Christina", img: trainer5, desc: "Nutrition and wellness expert." },
+  { name: "Coach Marko", img: trainer6, desc: "Strength & conditioning specialist." },
+]);
+
+const visibleCount = ref(3);
+const startIndex = ref(0);
+
+const visibleTrainers = computed(() =>
+  trainers.value.slice(startIndex.value, startIndex.value + visibleCount.value)
+);
+
+const maxStartIndex = computed(() =>
+  trainers.value.length - visibleCount.value
+);
+
+function nextTrainer() {
+  if (startIndex.value < maxStartIndex.value) {
+    startIndex.value++;
+  }
+}
+
+function prevTrainer() {
+  if (startIndex.value > 0) {
+    startIndex.value--;
+  }
+}
 </script>
+
 
 <template>
   <div class="bg-light py-5">
@@ -67,45 +105,40 @@ import gym from "../assets/gym.png";
         </p>
       </div>
 
-      <!-- Trainers -->
-      <div class="mb-5">
-        <h3 class="fw-bold text-center mb-4">Meet Our Coaches</h3>
-        <div class="row text-center g-4">
-          <div class="col-md-4">
-            <div class="card shadow-sm h-100">
-              <img :src="trainer1" class="card-img-top" alt="Coach Alex" />
-              <div class="card-body">
-                <h5 class="card-title">Coach Alex</h5>
-                <p class="card-text text-muted">
-                  Strength training expert with 10+ years of experience.
-                </p>
-              </div>
-            </div>
-          </div>
 
-          <div class="col-md-4">
-            <div class="card shadow-sm h-100">
-              <img :src="trainer2" class="card-img-top" alt="Coach Maria" />
-              <div class="card-body">
-                <h5 class="card-title">Coach Maria</h5>
-                <p class="card-text text-muted">
-                  Certified yoga and pilates instructor.
-                </p>
-              </div>
-            </div>
-          </div>
 
-          <div class="col-md-4">
-            <div class="card shadow-sm h-100">
-              <img :src="trainer3" class="card-img-top" alt="Coach Marko" />
-              <div class="card-body">
-                <h5 class="card-title">Coach Marko</h5>
-                <p class="card-text text-muted">Cardio and HIIT specialist.</p>
-              </div>
+      
+    <!-- Trainer Card -->
+    <div class="mb-5">
+    <h3 class="fw-bold text-center mb-4">Meet Our Coaches</h3>
+    <div class="d-flex justify-content-center align-items-center position-relative">
+
+      <!-- Left Arrow -->
+      <button @click="prevTrainer" class="btn btn-dark position-absolute start-0 top-50 translate-middle-y" :disabled="startIndex === 0">
+        &#8592;
+      </button>
+
+      <!-- Trainer Cards -->
+      <div class="d-flex gap-3 mx-5 overflow-hidden" style="width: 80%;">
+        <div class="d-flex w-100">
+          <div v-for="(trainer, index) in visibleTrainers" :key="index" class="card shadow-sm m-3" style="flex: 1 0 0;">
+            <img :src="trainer.img" class="card-img-top" :alt="trainer.name" />
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ trainer.name }}</h5>
+              <p class="card-text text-muted">{{ trainer.desc }}</p>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- Right Arrow -->
+      <button @click="nextTrainer" class="btn btn-dark position-absolute end-0 top-50 translate-middle-y" :disabled="startIndex >= maxStartIndex">
+        &#8594;
+      </button>
+
+    </div>
+  </div>
+
 
       <!-- Motto -->
       <div class="text-center py-4 bg-white rounded shadow-sm">
@@ -116,3 +149,10 @@ import gym from "../assets/gym.png";
     </div>
   </div>
 </template>
+
+ 
+  <style>
+  .transition-transform {
+  transition: transform 0.5s ease;
+}
+</style>

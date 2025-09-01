@@ -29,20 +29,27 @@ import logo from '../assets/logo.png'
       <!-- Links -->
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-5">
-          <li class="nav-item">
+          <li class="nav-item pe-4">
             <router-link class="nav-link" to="/" exact>Home</router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item pe-4">
             <router-link class="nav-link" to="/about">About Us</router-link>
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/trainers">Trainers</router-link>
+          <li class="nav-item pe-4">
+            <router-link class="nav-link" to="/trainers">Coaches</router-link>
           </li>
-           <li class="nav-item">
+           <li class="nav-item pe-4">
             <router-link class="nav-link" to="/makeAnAppointment">Make an appointment</router-link>
           </li>
+           <li class="nav-item pe-4">
+            <router-link class="nav-link" to="/makeAnAppointment">Contact</router-link>
+          </li>
         </ul>
+
+
+        
       </div>
+      
     </div>
   </nav>
 </template>
