@@ -15,6 +15,7 @@ import img7GALLERY from '../assets/img7GALLERY.jpg'
 
 import { db } from "../firebase"
 import { collection, addDoc } from "firebase/firestore"
+import emailjs from "@emailjs/browser";
 
 export default {
   name: "App",
@@ -60,12 +61,12 @@ export default {
     prevImage() {
       this.currentImage = (this.currentImage - 1 + this.images.length) % this.images.length;
     },
-    async handleSubmit(event) {
+   async handleSubmit(event) {
       const form = event.target;
 
       if (form.checkValidity()) {
         try {
-         
+          // 1️⃣ Save form to Firestore
           await addDoc(collection(db, "submissions"), {
             firstName: this.firstName,
             lastName: this.lastName,
@@ -73,23 +74,32 @@ export default {
             createdAt: new Date()
           });
 
-          this.formSubmitted = true;
+          // 2️⃣ Send welcome email
+          await emailjs.send(
+            "service_0hf4rx4",   // Replace with your Service ID
+            "template_qvo4rii", // Template ID
+            {
+              firstName: this.firstName,
+              email: this.email
+            },
+            "Mlk76JHJ1zNp84Q7U"   
+          );
 
-        
+          alert("Form submitted and welcome email sent!");
+
+          // Reset form fields
           this.firstName = "";
           this.lastName = "";
           this.email = "";
+          form.classList.remove("was-validated");
 
-          clearTimeout(this.bannerTimeout);
-          this.bannerTimeout = setTimeout(() => {
-            this.formSubmitted = false;
-          }, 5000);
         } catch (error) {
-          console.error("Error adding document: ", error);
+          console.error("Error: ", error);
           alert("Something went wrong. Please try again.");
         }
+      } else {
+        form.classList.add("was-validated");
       }
-      form.classList.add("was-validated");
     }
   }
 };
