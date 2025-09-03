@@ -13,6 +13,9 @@ import img5GALLERY from '../assets/img5GALLERY.jpg'
 import img6GALLERY from '../assets/img6GALLERY.jpg'
 import img7GALLERY from '../assets/img7GALLERY.jpg'
 
+import { db } from "../firebase"
+import { collection, addDoc } from "firebase/firestore"
+
 export default {
   name: "App",
   data() {
@@ -27,7 +30,7 @@ export default {
       currentImage: 0,
       images: [img1GALLERY, img2GALLERY, img3GALLERY, img4GALLERY, img5GALLERY, img6GALLERY, img7GALLERY],
       formSubmitted: false,
-       searchQuery: "",
+      searchQuery: "",
       searchResults: [],
       allItems: [
         "Home",
@@ -40,45 +43,58 @@ export default {
         "CoreFit Blog",
         "Membership Plans",
         "Gym Schedule"
-      ]
+      ],
+     
+      firstName: "",
+      lastName: "",
+      email: ""
     };
   },
   methods: {
-  toggleText() {
-    this.showMore = !this.showMore;
-  },
-  nextImage() {
+    toggleText() {
+      this.showMore = !this.showMore;
+    },
+    nextImage() {
       this.currentImage = (this.currentImage + 1) % this.images.length;
     },
     prevImage() {
-      this.currentImage =
-        (this.currentImage - 1 + this.images.length) % this.images.length;
+      this.currentImage = (this.currentImage - 1 + this.images.length) % this.images.length;
     },
-     handleSubmit(event) {
+    async handleSubmit(event) {
       const form = event.target;
-      if (form.checkValidity()) {
-        this.formSubmitted = true;
-        clearTimeout(this.bannerTimeout);
-        this.bannerTimeout = setTimeout(() => {
-          this.formSubmitted = false;
-        }, 5000);
 
+      if (form.checkValidity()) {
+        try {
+         
+          await addDoc(collection(db, "submissions"), {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            email: this.email,
+            createdAt: new Date()
+          });
+
+          this.formSubmitted = true;
+
+        
+          this.firstName = "";
+          this.lastName = "";
+          this.email = "";
+
+          clearTimeout(this.bannerTimeout);
+          this.bannerTimeout = setTimeout(() => {
+            this.formSubmitted = false;
+          }, 5000);
+        } catch (error) {
+          console.error("Error adding document: ", error);
+          alert("Something went wrong. Please try again.");
+        }
       }
-      form.classList.add('was-validated');
-    }, 
-    handleSearch() {
-    const query = this.searchQuery.trim().toLowerCase();
-    if (!query) {
-      this.searchResults = [];
-      return;
+      form.classList.add("was-validated");
     }
-    this.searchResults = this.allItems.filter(item =>
-      item.toLowerCase().includes(query)
-    );
   }
-}
-}
+};
 </script>
+
 
 
 
@@ -178,29 +194,27 @@ export default {
   <div class="px-5 pt-5">
     <h1 class="fw-bold my-3">STAY INFORMED & GET FIT</h1>
     <p class="fs-4">Get the latest World Gym news, fitness tips, & exclusive offers delivered straight to your inbox.</p>
-    <form class="row g-3 needs-validation" novalidate @submit.prevent="handleSubmit">
-    <div class="col-md-4">
-      <input type="text" class="form-control py-2" id="firstName" placeholder="First Name*" required>
-      <div class="valid-feedback">Looks good!</div>
-      <div class="invalid-feedback">Please enter your first name.</div>
-    </div>
+   <form class="row g-3 needs-validation" novalidate @submit.prevent="handleSubmit">
+  <div class="col-md-4">
+    <input v-model="firstName" type="text" class="form-control py-2" placeholder="First Name*" required>
+    <div class="invalid-feedback">Please enter your first name.</div>
+  </div>
 
-    <div class="col-md-4">
-      <input type="text" class="form-control py-2" id="lastName" placeholder="Last Name*" required>
-      <div class="valid-feedback">Looks good!</div>
-      <div class="invalid-feedback">Please enter your last name.</div>
-    </div>
+  <div class="col-md-4">
+    <input v-model="lastName" type="text" class="form-control py-2" placeholder="Last Name*" required>
+    <div class="invalid-feedback">Please enter your last name.</div>
+  </div>
 
-    <div class="col-md-4">
-      <input type="email" class="form-control py-2" id="email" placeholder="Email Address*" required>
-      <div class="valid-feedback">Looks good!</div>
-      <div class="invalid-feedback">Please enter a valid email.</div>
-    </div>
+  <div class="col-md-4">
+    <input v-model="email" type="email" class="form-control py-2" placeholder="Email Address*" required>
+    <div class="invalid-feedback">Please enter a valid email.</div>
+  </div>
 
-    <div class="col-12">
-      <button class="btn btn-danger px-4 fs-4 fw-bold" type="submit">SUBMIT</button>
-    </div>
-  </form>
+  <div class="col-12">
+    <button class="btn btn-danger px-4 fs-4 fw-bold" type="submit">SUBMIT</button>
+  </div>
+</form>
+
 
   <div v-if="formSubmitted" class="alert alert-secondary mt-5 fs-5">
     <p>THANK YOU FOR

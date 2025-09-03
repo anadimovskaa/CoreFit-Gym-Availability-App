@@ -46,7 +46,7 @@ function prevTrainer() {
 <template>
   <div class="bg-light py-5">
     <div class="container">
-      <!-- Title -->
+      
       <div class="text-center mb-5">
         <h1 class="fw-bold">About Us</h1>
         <p class="lead text-muted">
@@ -54,9 +54,9 @@ function prevTrainer() {
         </p>
       </div>
 
-      <!-- Our Story -->
+    
       <div class="row align-items-center mb-5">
-        <!-- Image -->
+       
         <div class="col-md-6 text-center mb-4 mb-md-0">
           <img
             :src="gym"
@@ -90,7 +90,6 @@ function prevTrainer() {
         </div>
       </div>
 
-      <!-- Who We Are -->
       <div class="mb-5 text-center">
         <h3 class="fw-bold mb-4">Who We Are</h3>
         <p class="fs-5">
@@ -108,17 +107,15 @@ function prevTrainer() {
 
 
       
-    <!-- Trainer Card -->
+ 
     <div class="mb-5">
     <h3 class="fw-bold text-center mb-4">Meet Our Coaches</h3>
     <div class="d-flex justify-content-center align-items-center position-relative">
 
-      <!-- Left Arrow -->
       <button @click="prevTrainer" class="btn btn-dark position-absolute start-0 top-50 translate-middle-y" :disabled="startIndex === 0">
         &#8592;
       </button>
 
-      <!-- Trainer Cards -->
       <div class="d-flex gap-3 mx-5 overflow-hidden" style="width: 80%;">
         <div class="d-flex w-100">
           <div v-for="(trainer, index) in visibleTrainers" :key="index" class="card shadow-sm m-3" style="flex: 1 0 0;">
@@ -131,7 +128,7 @@ function prevTrainer() {
         </div>
       </div>
 
-      <!-- Right Arrow -->
+    
       <button @click="nextTrainer" class="btn btn-dark position-absolute end-0 top-50 translate-middle-y" :disabled="startIndex >= maxStartIndex">
         &#8594;
       </button>
