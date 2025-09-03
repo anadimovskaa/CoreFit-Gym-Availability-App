@@ -158,5 +158,31 @@ function prevTrainer() {
   height: 400px;     /* fixed height (adjust as needed) */
   object-fit: cover; /* crop instead of stretch */
 }
+.card {
+  flex: 1 0 0;   /* default: share space */
+}
+
+@media (max-width: 768px) {
+  .d-flex.w-100 {
+    flex-direction: column; /* stack vertically */
+  }
+
+  .d-flex.w-100 .card {
+    flex: 0 0 100%; /* full width */
+    max-width: 100%;
+    margin: 10px 0; /* space between cards */
+  }
+
+  .d-flex.gap-3.mx-5.overflow-hidden {
+    width: 100%;   /* fit small screen */
+    margin: 0;     /* remove big margins */
+  }
+
+  /* optional: hide arrows on small screens */
+  .btn.position-absolute {
+    display: none;
+  }
+}
+
 
 </style>
