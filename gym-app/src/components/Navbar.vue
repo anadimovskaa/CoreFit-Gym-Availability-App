@@ -42,7 +42,7 @@ import logo from '../assets/logo.png'
             <router-link class="nav-link" to="/makeAnAppointment">Make an appointment</router-link>
           </li>
            <li class="nav-item pe-4">
-            <router-link class="nav-link" to="/makeAnAppointment">Contact</router-link>
+            <router-link class="nav-link" to="/contact">Contact</router-link>
           </li>
         </ul>
 
