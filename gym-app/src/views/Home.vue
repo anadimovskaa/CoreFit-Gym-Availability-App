@@ -233,7 +233,7 @@ CONNECTING WITH US!</p>
   </div>
 
 <div class="p-5" id="submit">
-  <p>By clicking SUBMIT below, you agree to the Privacy Policy and authorize CoreFit, our affiliates, as well as our marketing and/or service providers to send you non-emergency, automated text messages at the number you entered above. Consent is not a condition of purchase. Reply STOP to opt-out of text messaging. Standard rates may apply.</p>
+  <p>By clicking SUBMIT, you agree to the Privacy Policy and authorize CoreFit, our affiliates, as well as our marketing and/or service providers to send you non-emergency, automated text messages at the number you entered above. Consent is not a condition of purchase. Reply STOP to opt-out of text messaging. Standard rates may apply.</p>
 </div>
   </div>
 </div>
@@ -291,36 +291,33 @@ body{
 }
 
 @media only screen and (max-width: 600px) {
-  .main {
-    min-height: 600px; /* Let the hero section grow if needed */
-    background-position: top;
-    padding-bottom: 50px; /* Space below hero so cards don’t overlap */
+.main {
+    flex-direction: column; /* stack content */
+    text-align: center;     /* center text */
+    padding: 2rem 1rem;     /* reduce padding */
   }
 
   .text-main {
-    top: 50px; /* Less top offset for mobile */
-    font-size: 16px;
-    text-align: center;
-    padding: 0 10px;
+    margin: 0;
+    padding: 1rem;
   }
 
   .text-main h1 {
-    font-size: 40px;
+    font-size: 1.8rem;  /* smaller headline */
+    line-height: 1.3;
   }
 
   .text-main p {
-    width: 100% !important; /* Make paragraph full width */
-    font-size: 16px;
-    text-align: center;
-    padding: 0 10px;
-    margin-bottom: 20px; /* Extra spacing below paragraph */
+    font-size: 1rem;   /* readable text */
+    line-height: 1.5;
+    max-width: 100%;   /* full width */
+    margin: 1rem auto;
   }
 
   .text-main .btn {
     display: block;
-    width: 80%;
-    margin: 10px auto; /* Center buttons */
-    font-size: 16px;
+    width: 100%;      /* full-width buttons on phone */
+    margin: 0.5rem 0;
   }
 
   .cards .d-flex {
@@ -354,8 +351,14 @@ body{
   form .col-12 {
     width: 100%;
   }
-  #submit{
-    width: 100%;
+   #submit p {
+    width: 100%;          /* take full width */
+    max-width: 100%;      /* prevent limiting */
+    font-size: 0.9rem;    /* make text more readable */
+    line-height: 1.5;
+    text-align: justify;  /* optional: makes text tidy */
+    padding: 0;      /* some breathing room left/right */
+  
   }
 }
 

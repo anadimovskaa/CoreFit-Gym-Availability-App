@@ -6,7 +6,7 @@ import trainer2 from "../assets/coach22.png";
 import trainer3 from "../assets/coach33.png";
 import trainer4 from "../assets/coach44.jpg";
 import trainer5 from "../assets/coach55.jpg";
-import trainer6 from "../assets/coach66.jpg";
+import trainer6 from "../assets/coach66.jpeg";
 import gym from "../assets/gym.png";
 
 const trainers = ref([
@@ -151,5 +151,12 @@ function prevTrainer() {
   <style>
   .transition-transform {
   transition: transform 0.5s ease;
+  
 }
+.card-img-top {
+  width: 100%;       /* full card width */
+  height: 400px;     /* fixed height (adjust as needed) */
+  object-fit: cover; /* crop instead of stretch */
+}
+
 </style>

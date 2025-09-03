@@ -2,6 +2,9 @@
 import coach1 from "../assets/coach11.png";
 import coach2 from "../assets/coach22.png";
 import coach3 from "../assets/coach33.png";
+import coach4 from "../assets/coach44.jpg";
+import coach5 from "../assets/coach55.jpg";
+import coach6 from "../assets/coach66.jpeg";
 
 const trainers = [
   {
@@ -37,6 +40,40 @@ const trainers = [
     phone: "+345 678 921",
     email:"jane@gmail.com"
   },
+  {
+    id: 4,
+    name: "Coach Tom",
+    specialty: "Functional Training & Mobility",
+    bio: "Tom is a specialist in functional movement and mobility improvement. He helps clients move better, prevent injuries, and build a strong foundation for any fitness goal.",
+    img: coach4,
+    quote: "Move better, feel stronger.",
+    longbio: "Coach Tom combines expert knowledge of biomechanics and mobility training to create sessions that focus on real-life strength, flexibility, and injury prevention. His approach is ideal for athletes, active individuals, and anyone who wants to move with more freedom and less pain. Whether you're recovering from an injury or looking to improve your everyday performance, Tom’s programs are practical, safe, and highly effective.",
+    phone: "+123 456 789",
+    email: "tom@gmail.com"
+  },
+  {
+    id: 5,
+    name: "Coach Christina",
+    specialty: "Nutrition & Wellness",
+    bio: "Christina is a certified nutrition and wellness expert dedicated to helping clients build healthier eating habits and balanced lifestyles.",
+    img: coach5,
+    quote: "Fuel your body, fuel your life.",
+    longbio: "Coach Christina combines expert knowledge in nutrition, wellness coaching, and holistic health to create customized plans that fit every lifestyle. Her approach focuses on practical, sustainable changes—whether your goal is weight management, improved energy levels, or overall health enhancement. With her guidance, you’ll learn how to nourish your body, develop mindful eating habits, and make choices that support your long-term well-being.",
+    phone: "+456 789 123",
+    email: "christina@gmail.com"
+  },
+  {
+    id: 6,
+    name: "Coach Marko",
+  specialty: "Strength & Conditioning",
+  bio: "Marko is a strength and conditioning specialist who helps clients develop power, endurance, and peak athletic performance.",
+  img: coach6,
+  quote: "Strength is the foundation of success.",
+  longbio: "Coach Marko brings years of experience in building strength, increasing athletic performance, and creating well-rounded training programs. His sessions focus on compound movements, progressive overload, and proper technique to ensure consistent and safe progress. Whether you're training for a sport, looking to enhance your physique, or simply want to become stronger in daily life, Marko’s structured programs will get you there.",
+  phone: "+567 891 234",
+  email: "marko@gmail.com"
+  }
+
 ];
 </script>
 
