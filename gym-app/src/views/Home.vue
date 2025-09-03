@@ -222,7 +222,7 @@ CONNECTING WITH US!</p>
 <p>Keep an eye out for News, Tips, and Offers sent straight to your inbox.</p>
   </div>
 
-<div class="p-5">
+<div class="p-5" id="submit">
   <p>By clicking SUBMIT below, you agree to the Privacy Policy and authorize CoreFit, our affiliates, as well as our marketing and/or service providers to send you non-emergency, automated text messages at the number you entered above. Consent is not a condition of purchase. Reply STOP to opt-out of text messaging. Standard rates may apply.</p>
 </div>
   </div>
@@ -279,4 +279,75 @@ body{
   background-color: red;
   color: white;
 }
+
+@media only screen and (max-width: 600px) {
+  .main {
+    min-height: 600px; /* Let the hero section grow if needed */
+    background-position: top;
+    padding-bottom: 50px; /* Space below hero so cards don’t overlap */
+  }
+
+  .text-main {
+    top: 50px; /* Less top offset for mobile */
+    font-size: 16px;
+    text-align: center;
+    padding: 0 10px;
+  }
+
+  .text-main h1 {
+    font-size: 40px;
+  }
+
+  .text-main p {
+    width: 100% !important; /* Make paragraph full width */
+    font-size: 16px;
+    text-align: center;
+    padding: 0 10px;
+    margin-bottom: 20px; /* Extra spacing below paragraph */
+  }
+
+  .text-main .btn {
+    display: block;
+    width: 80%;
+    margin: 10px auto; /* Center buttons */
+    font-size: 16px;
+  }
+
+  .cards .d-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cards .card {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
+  .text-img-div .row {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .text-img-div img {
+    max-height: 300px;
+    width: 100%;
+  }
+
+  .text-img-div button {
+    margin-top: 10px;
+  }
+
+  form .col-md-4 {
+    width: 100%;
+  }
+
+  form .col-12 {
+    width: 100%;
+  }
+  #submit{
+    width: 100%;
+  }
+}
+
+
 </style>
