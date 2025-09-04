@@ -1,8 +1,27 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { auth } from '../firebase'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
 
-// Load the logo correctly with Vite
+// Load logo
 import logo from '../assets/logo.png'
+
+// Track logged-in user
+const user = ref(null)
+const router = useRouter()
+
+onMounted(() => {
+  onAuthStateChanged(auth, (u) => {
+    user.value = u
+  })
+})
+
+const logout = async () => {
+  await signOut(auth)
+  user.value = null
+  router.push('/login')
+}
 </script>
 
 <template>
@@ -38,21 +57,35 @@ import logo from '../assets/logo.png'
           <li class="nav-item pe-4">
             <router-link class="nav-link" to="/trainers">Coaches</router-link>
           </li>
-           <li class="nav-item pe-4">
+          <li class="nav-item pe-4">
             <router-link class="nav-link" to="/makeAnAppointment">Make an appointment</router-link>
           </li>
-           <li class="nav-item pe-4">
+          <li class="nav-item pe-4">
             <router-link class="nav-link" to="/contact">Contact</router-link>
           </li>
-          <li class="nav-item pe-4">
+
+          <!-- Only show Sign Up if not logged in -->
+          <li v-if="!user" class="nav-item pe-4">
             <router-link class="nav-link" to="/signup">Sign Up</router-link>
           </li>
+
+          <!-- My Appointments only if logged in -->
+          <li v-if="user" class="nav-item pe-4">
+            <router-link class="nav-link" to="/my-appointments">My Appointments</router-link>
+          </li>
+
+          <!-- Logout button if logged in -->
+          <li v-if="user" class="nav-item pe-4">
+            <button class="btn btn-outline-danger btn-sm" @click="logout">Logout</button>
+          </li>
+
+          <!-- Login button if not logged in -->
+          <li v-if="!user" class="nav-item pe-4">
+            <router-link class="nav-link" to="/login">Login</router-link>
+          </li>
+
         </ul>
-
-
-        
       </div>
-      
     </div>
   </nav>
 </template>

@@ -1,6 +1,7 @@
 <script setup>
 
 import { db } from "../firebase";
+import { auth } from "../firebase"; 
 import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 
 
@@ -8,7 +9,7 @@ import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 
 import { ref, computed } from 'vue'
 
-const coaches = ["Maria (Yoga)", "Jane (HIIT)", "Marko (Strength)"]
+const coaches = ["Maria (Yoga)", "Jane (HIIT)", "Alex (Strength)", "Tom (Mobility)","Cristina (Nutrition)","Marko (Conditioning)"]
 
 
 const today = new Date()
@@ -57,7 +58,7 @@ function nextMonth() {
 const baseSlots = [
   { hour: "08:00", capacity: 5, coach: "" },
   { hour: "10:00", capacity: 3, coach: "" },
-  { hour: "12:00", capacity: 0, coach: "" },
+  { hour: "12:00", capacity: 5, coach: "" },
   { hour: "16:00", capacity: 2, coach: "" },
   { hour: "18:00", capacity: 4, coach: "" },
 ]
@@ -85,6 +86,21 @@ async function bookSlot(slot) {
       console.error("Error saving appointment: ", e);
       alert("Could not save appointment. Try again.");
     }
+    try {
+  const userId = auth.currentUser ? auth.currentUser.uid : null;
+
+  await addDoc(collection(db, "appointments"), {
+    userId,
+    date: `${selectedDay.value}-${currentMonth.value + 1}-${currentYear.value}`,
+    hour: slot.hour,
+    coach: slot.coach,
+    createdAt: new Date()
+  });
+
+  // then update UI
+} catch (e) {
+  console.error("Error saving appointment: ", e);
+}
   }
 }
 

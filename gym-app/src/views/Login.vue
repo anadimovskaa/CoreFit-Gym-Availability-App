@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <div class="container my-5" style="max-width:420px;">
     <h2 class="mb-4 text-center">Sign In</h2>
 
@@ -61,10 +61,4 @@ export default {
 
 <style scoped>
 .container { max-width: 420px; }
-</style> -->
-<style scoped>
 </style>
-
-<template>
-    
-</template>
