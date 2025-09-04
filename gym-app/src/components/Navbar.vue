@@ -4,10 +4,10 @@ import { useRouter } from 'vue-router'
 import { auth } from '../firebase'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 
-// Load logo
+
 import logo from '../assets/logo.png'
 
-// Track logged-in user
+
 const user = ref(null)
 const router = useRouter()
 
@@ -27,12 +27,12 @@ const logout = async () => {
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid px-5 py-2">
-      <!-- Brand -->
+   
       <router-link class="navbar-brand" to="/">
         <img :src="logo" alt="Logo" height="85" width="85">
       </router-link>
 
-      <!-- Toggler for mobile -->
+   
       <button
         class="navbar-toggler"
         type="button"
@@ -45,7 +45,7 @@ const logout = async () => {
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Links -->
+   
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-5">
           <li class="nav-item pe-4">
@@ -58,15 +58,16 @@ const logout = async () => {
             <router-link class="nav-link" to="/trainers">Coaches</router-link>
           </li>
           <li class="nav-item pe-4">
-            <router-link class="nav-link" to="/makeAnAppointment">Make an appointment</router-link>
+            <router-link class="nav-link" to="/contact">Contact Us</router-link>
           </li>
-          <li class="nav-item pe-4">
-            <router-link class="nav-link" to="/contact">Contact</router-link>
+
+           <li v-if="user" class="nav-item pe-4">
+            <router-link class="nav-link" to="/makeAnAppointment">Make an appointment</router-link>
           </li>
 
           <!-- Only show Sign Up if not logged in -->
           <li v-if="!user" class="nav-item pe-4">
-            <router-link class="nav-link" to="/signup">Sign Up</router-link>
+            <router-link class="nav-link" to="/signup">Register</router-link>
           </li>
 
           <!-- My Appointments only if logged in -->
@@ -81,7 +82,7 @@ const logout = async () => {
 
           <!-- Login button if not logged in -->
           <li v-if="!user" class="nav-item pe-4">
-            <router-link class="nav-link" to="/login">Login</router-link>
+            <router-link class="nav-link" to="/login">Have an account?</router-link>
           </li>
 
         </ul>
