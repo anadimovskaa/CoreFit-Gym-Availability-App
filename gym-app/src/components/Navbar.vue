@@ -44,6 +44,9 @@ import logo from '../assets/logo.png'
            <li class="nav-item pe-4">
             <router-link class="nav-link" to="/contact">Contact</router-link>
           </li>
+          <li class="nav-item pe-4">
+            <router-link class="nav-link" to="/signup">Sign Up</router-link>
+          </li>
         </ul>
 
 
